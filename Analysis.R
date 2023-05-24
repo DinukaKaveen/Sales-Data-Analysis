@@ -10,8 +10,11 @@ head(input_data[order(input_data$QUANTITY, decreasing = TRUE),], 10)
 
 # 2.2) Select most selling products by selling quantities
 
-# Get selling quantities 
+# Get most selling quantities (most selling quantities are 15,14,13...)
 table(input_data$QUANTITY)
-# Get selling quantities = 15
-subset()
+
+# Get selling quantity = 15
+subset(input_data, input_data$QUANTITY == 15)
+# Get selling quantity = 14
+subset(input_data, input_data$QUANTITY == 14)
 

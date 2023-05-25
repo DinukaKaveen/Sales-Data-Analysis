@@ -1,9 +1,11 @@
 # 1) Find most frequently used SALE TYPE
+#----------------------------------------
 
 sort(table(input_data$`SALE TYPE`), decreasing = TRUE)
 barplot(table(input_data$`SALE TYPE`), main = "Most frequently SALE TYPE", xlab = "Sale Type", ylab = "Sales Count")
 
-# 2) Find most selling products***
+# 2) Find most selling products
+#------------------------------
 
 # 2.1) Select top 10 most selling products
 head(input_data[order(input_data$QUANTITY, decreasing = TRUE),], 10) 
@@ -18,6 +20,30 @@ subset(input_data, input_data$QUANTITY == 15)
 # Get selling quantity = 14
 subset(input_data, input_data$QUANTITY == 14)
 
-# 3) Find most selling year
+
+# 3) Find most selling year by profit
+#-------------------------------------
+
+# 3.1) Add new PROFIT column to get profit of each products in Master Data sheet
+master_data$PROFIT <- with(master_data, master_data$`SELLING PRICE` - master_data$`BUYING PRIZE`)
+master_data
+
+# 3.2) Create a table(pro_profit) with PRODUT ID & PROFIT using Master Data sheet
+library('dplyr')
+pro_profit <- master_data %>% select('PRODUCT ID', 'PROFIT')
+pro_profit
+
+# 3.3) Join Input Data and pro_profit tables by PRODUCT ID to add PROFIT column into the Input Data table
+input_data <- inner_join(input_data, pro_profit, by = c("PRODUCT ID"))
+input_data
+
+# 3.4) Create column to get total profit of each products by selling qty
+input_data$`TOTAL PROFIT` <- with(input_data, input_data$PROFIT * input_data$QUANTITY)
+
+# 3.5) 
 yrs <- format(input_data$DATE, format = "%Y")
-barplot(table(yrs)) 
+barplot(tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum))
+
+
+
+

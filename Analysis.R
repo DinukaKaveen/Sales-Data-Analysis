@@ -21,15 +21,14 @@ subset(input_data, input_data$QUANTITY == 15)
 subset(input_data, input_data$QUANTITY == 14)
 
 
-# 3) Find most selling year by profit
+# 3) Find year wise Profit
 #-------------------------------------
 
-# 3.1) Add new PROFIT column to get profit of each products in Master Data sheet
+# 3.1) Add new PROFIT column to get profit of each products
 master_data$PROFIT <- with(master_data, master_data$`SELLING PRICE` - master_data$`BUYING PRIZE`)
 master_data
 
 # 3.2) Create a table(pro_profit) with PRODUT ID & PROFIT using Master Data sheet
-library('dplyr')
 pro_profit <- master_data %>% select('PRODUCT ID', 'PROFIT')
 pro_profit
 
@@ -40,15 +39,20 @@ input_data
 # 3.4) Create column to get total profit of each products by selling qty
 input_data$`TOTAL PROFIT` <- with(input_data, input_data$PROFIT * input_data$QUANTITY)
 
-# 3.5) 
+# 3.5) Create bar chart for the year wise profit
 yrs <- format(input_data$DATE, format = "%Y")
 tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum)
 
-barplot(tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum))
+barplot(tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum), xlab = "Year", ylab = "Profit", main = "Year wise sales Profit")
 
+# 4) Find most selling categories
 
+# 4.1) Add new CATEGORY column to get category of each products
+pro_category <- master_data %>% select("PRODUCT ID", "CATEGORY")
+input_data <- inner_join(input_data, pro_category, by = c("PRODUCT ID"))
 
-
-
+# Create bar chart for the category wise sales
+barplot(tapply(input_data$QUANTITY, input_data$CATEGORY, FUN = sum), xlab = "Category", ylab = "Sales(Qty)", main = "Category wise sales")
+tapply(input_data$QUANTITY, input_data$CATEGORY, FUN = sum)
 
 

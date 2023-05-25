@@ -18,3 +18,6 @@ subset(input_data, input_data$QUANTITY == 15)
 # Get selling quantity = 14
 subset(input_data, input_data$QUANTITY == 14)
 
+# 3) Find most selling year
+yrs <- format(input_data$DATE, format = "%Y")
+barplot(table(yrs)) 

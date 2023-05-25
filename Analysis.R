@@ -42,7 +42,12 @@ input_data$`TOTAL PROFIT` <- with(input_data, input_data$PROFIT * input_data$QUA
 
 # 3.5) 
 yrs <- format(input_data$DATE, format = "%Y")
+tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum)
+
 barplot(tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum))
+
+
+
 
 
 

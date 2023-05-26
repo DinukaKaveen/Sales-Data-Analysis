@@ -15,14 +15,14 @@ head(input_data[order(input_data$QUANTITY, decreasing = TRUE),], 10)
 # Get most selling quantities (most selling quantities are 15,14,13...)
 table(input_data$QUANTITY)
 
-# Get selling quantity = 15
+# Get product list by selling quantity = 15
 subset(input_data, input_data$QUANTITY == 15)
-# Get selling quantity = 14
+# Get product list by selling quantity = 14
 subset(input_data, input_data$QUANTITY == 14)
 
 
-# 3) Find year wise Profit
-#-------------------------------------
+# 3) Find year wise Profit by selling qty
+#----------------------------------------
 
 # 3.1) Add new PROFIT column to get profit of each products
 master_data$PROFIT <- with(master_data, master_data$`SELLING PRICE` - master_data$`BUYING PRIZE`)
@@ -46,6 +46,7 @@ tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum)
 barplot(tapply(input_data$`TOTAL PROFIT`, yrs, FUN = sum), xlab = "Year", ylab = "Profit", main = "Year wise sales Profit")
 
 # 4) Find most selling categories
+#--------------------------------
 
 # 4.1) Add new CATEGORY column to get category of each products
 pro_category <- master_data %>% select("PRODUCT ID", "CATEGORY")
@@ -54,5 +55,7 @@ input_data <- inner_join(input_data, pro_category, by = c("PRODUCT ID"))
 # Create bar chart for the category wise sales
 barplot(tapply(input_data$QUANTITY, input_data$CATEGORY, FUN = sum), xlab = "Category", ylab = "Sales(Qty)", main = "Category wise sales")
 tapply(input_data$QUANTITY, input_data$CATEGORY, FUN = sum)
+
+
 
 

@@ -17,4 +17,9 @@ print(iqr)
 
 boxplot(input_data$QUANTITY, xlab = "Sales", ylab = "Sales Qty", main = "Sales Distribution by Qty")
 
+# Category wise sales distribution
+boxplot(input_data$QUANTITY ~ input_data$CATEGORY, xlab = "Category", ylab = "Sales Qty", main = "Sales Distribution by Category")
+
+
+
 

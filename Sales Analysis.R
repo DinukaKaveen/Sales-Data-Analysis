@@ -16,3 +16,5 @@ iqr = q3 - q1
 print(iqr)
 
 boxplot(input_data$QUANTITY, xlab = "Sales", ylab = "Sales Qty", main = "Sales Distribution by Qty")
+
+

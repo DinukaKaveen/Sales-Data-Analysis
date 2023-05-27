@@ -15,6 +15,12 @@ q3 = quantile(input_data$QUANTITY)[4]
 iqr = q3 - q1
 print(iqr)
 
+ul = q3 + iqr*1.5
+ll = q1 - iqr*1.5
+
+print(ul)
+print(ll)
+
 boxplot(input_data$QUANTITY, xlab = "Sales", ylab = "Sales Qty", main = "Sales Distribution by Qty")
 
 # Category wise sales distribution

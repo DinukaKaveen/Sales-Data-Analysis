@@ -39,6 +39,7 @@ pro_category <- master_data %>% select("PRODUCT ID", "CATEGORY")
 input_data <- inner_join(input_data, pro_category, by = c("PRODUCT ID"))
 
 # Create bar chart for the category wise sales
-barplot(tapply(input_data$QUANTITY, input_data$CATEGORY, FUN = sum), xlab = "Category", ylab = "Sales(Qty)", main = "Category wise sales")
 tapply(input_data$QUANTITY, input_data$CATEGORY, FUN = sum)
+barplot(tapply(input_data$QUANTITY, input_data$CATEGORY, FUN = sum), xlab = "Category", ylab = "Sales(Qty)", main = "Category wise sales")
+
 

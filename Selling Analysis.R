@@ -20,6 +20,7 @@ boxplot(input_data$QUANTITY, xlab = "Sales", ylab = "Sales Qty", main = "Sales D
 # Category wise sales distribution
 boxplot(input_data$QUANTITY ~ input_data$CATEGORY, xlab = "Category", ylab = "Sales Qty", main = "Sales Distribution by Category")
 
-
-
+# Buying price & Selling price correlation 
+plot(x = master_data$`BUYING PRIZE`, y = master_data$`SELLING PRICE`, xlab = "Buying Price", ylab = "Selling price", main = "Buying & Selling price correlation")
+cor(master_data$`BUYING PRIZE`, master_data$`SELLING PRICE`)
 

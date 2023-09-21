@@ -1,3 +1,7 @@
+library(readxl)
+input_data <- read_excel("~/R/Data Sets/Sales data.xlsx", sheet = "Input Data")
+master_data <- read_excel("~/R/Data Sets/Sales data.xlsx", sheet = "Master Data")
+
 # 1) Find most frequently used SALE TYPE
 #----------------------------------------
 
